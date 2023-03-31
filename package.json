@@ -1,0 +1,26 @@
+{
+  "name": "weekend-jquery-salary-calculator",
+  "version": "1.0.0",
+  "description": "[Project Instructions](./INSTRUCTIONS.md), this line may be removed once you have updated the README.md",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kobijones111529/weekend-jquery-salary-calculator.git"
+  },
+  "author": "Kobi Jones",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kobijones111529/weekend-jquery-salary-calculator/issues"
+  },
+  "homepage": "https://github.com/kobijones111529/weekend-jquery-salary-calculator#readme",
+  "devDependencies": {
+    "eslint": "^8.37.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-n": "^15.7.0",
+    "eslint-plugin-promise": "^6.1.1"
+  }
+}
