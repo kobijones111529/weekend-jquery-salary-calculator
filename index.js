@@ -5,17 +5,29 @@ function main () {
 }
 
 function formSubmit (e) {
+  e.preventDefault();
+
   const form = $(e.target);
   const employee = {
     firstName: form.children('#form-first-name').val(),
     lastName: form.children('#form-last-name').val(),
-    id: form.children('#form-id').val(),
+    id: Number(form.children('#form-id').val()),
     title: form.children('#form-title').val(),
-    annualSalary: form.children('#form-annual-salary').val()
+    annualSalary: Number(form.children('#form-annual-salary').val())
   };
 
   if (employee.firstName.length < 1) {
     console.log('Employee must have a name');
+    return;
+  }
+
+  if (!Number.isInteger(employee.id) || employee.id < 0) {
+    console.log('Invalid employee id');
+    return;
+  }
+
+  if (!Number.isFinite(employee.annualSalary) || employee.annualSalary < 0) {
+    console.log('Invalid annual salary');
     return;
   }
 
