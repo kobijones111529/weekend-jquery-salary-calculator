@@ -1,6 +1,9 @@
 $(document).ready(main);
 
 function main () {
+  // Init total monthly salary to 0
+  $('#total-monthly').data('amount', 0);
+
   // Open (display) and focus form autofocus
   $('#form .field input[autofocus]').css('display', 'inline-block').focus();
 
@@ -92,14 +95,26 @@ function formReset (form) {
 }
 
 function addEntry (employee) {
+  const currencyFormatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD'
+  });
+
   const makeCell = data => $(`<td>${data}</td>`);
-  const table = $('<tr></tr>')
+  const row = $('<tr></tr>')
     .append(makeCell(employee.firstName))
     .append(makeCell(employee.lastName))
     .append(makeCell(employee.id))
     .append(makeCell(employee.title))
-    .append(makeCell(employee.annualSalary));
-  $('#data').append(table);
+    .append(makeCell(currencyFormatter.format(employee.annualSalary)))
+    .data('salary', employee.annualSalary);
+  $('#data').append(row);
+
+  const totalMonthlyElem = $('#total-monthly');
+  const totalMonthly = totalMonthlyElem.data('amount') + employee.annualSalary / 12;
+  totalMonthlyElem.data('amount', totalMonthly);
+  totalMonthlyElem.text(currencyFormatter.format(totalMonthly));
+
   console.group(`${employee.firstName} ${employee.lastName}`);
   console.log('ID:', employee.id);
   console.log('Title:', employee.title);
