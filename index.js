@@ -31,7 +31,7 @@ function main () {
     const minSize = 1;
     const maxSize = 20;
     const length = $(e.target).val().length;
-    $(e.target).attr('size', Math.max(0, Math.min(length || minSize, maxSize)));
+    $(e.target).attr('size', Math.max(minSize, Math.min(length || e.target.placeholder.length, maxSize)));
   });
 
   $('#form').submit(formSubmit);
