@@ -15,12 +15,33 @@
     </header>
 
     <main>
-      <form id="form">
-        <input id="form-first-name" type="text" placeholder="First name" autofocus>
-        <input id="form-last-name" type="text" placeholder="Last name">
-        <input id="form-id" type="text" inputmode="numeric" placeholder="ID">
-        <input id="form-title" type="text" placeholder="Title">
-        <input id="form-annual-salary" type="text" inputmode="numeric" placeholder="Annual salary">
+      <form id="form" spellcheck="false">
+        <button class="field" type="button">
+          <label for="first-name">First name</label>
+          <div class="vertical-separator"></div>
+          <input id="form-first-name" name="first-name" autofocus size="1">
+        </button>
+        <button class="field" type="button">
+          <label for="last-name">Last name</label>
+          <div class="vertical-separator"></div>
+          <input id="form-last-name" name="last-name" size="1">
+        </button>
+        <hr>
+        <button class="field" type="button">
+          <label for="id">ID</label>
+          <div class="vertical-separator"></div>
+          <input id="form-id" name="id" inputmode="numeric" size="1">
+        </button>
+        <button class="field" type="button">
+          <label for="title">Title</label>
+          <div class="vertical-separator"></div>
+          <input id="form-title" name="title" size="1">
+        </button>
+        <button class="field" type="button">
+          <label for="annual-salary">Annual salary</label>
+          <div class="vertical-separator"></div>
+          <input id="form-annual-salary" name="annual-salary" inputmode="numeric" size="1">
+        </button>
         <button id="form-submit-btn" type="submit">Submit</button>
       </form>
 

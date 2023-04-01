@@ -1,4 +1,121 @@
 body {
+  min-height: 100vh;
+  margin: 0;
+
   display: flex;
   flex-flow: column;
+  align-items: stretch;
+
+  background: #00000007;
+  color: black;
+}
+
+header {
+  width: 100%;
+  text-align: center;
+}
+
+main {
+  width: auto;
+  flex: auto;
+  margin: 32px 72px;
+
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 4px 4px 12px #0000003F;
+
+  background: white;
+}
+
+footer {
+  width: 100%;
+  text-align: center;
+}
+
+.vertical-separator {
+  background-color: white;
+  opacity: 80%;
+  display: inline-block;
+  width: 1px;
+}
+
+#form hr {
+  visibility: hidden;
+  width: 100%;
+}
+
+#form {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 8px;
+  width: 100%;
+  align-items: center;
+
+  color: black;
+}
+
+.field {
+  width: fit-content;
+  padding: 4px 20px;
+  max-width: 100%;
+
+  display: flex;
+  flex-flow: row;
+  align-items: stretch;
+  gap: 8px;
+
+  outline: none;
+  border: none;
+  border-radius: 48px;
+  background-color: rgb(20, 30, 200);
+  color: white;
+}
+
+.field, .field * {
+  cursor: text;
+}
+
+.field .vertical-separator, .field input {
+  display: none;
+}
+
+.field label {
+  opacity: 80%;
+  font-size: 1.2rem;
+  font-family: 'Courier New', Courier, monospace;
+  white-space: nowrap;
+}
+
+.field input {
+  flex: auto;
+  padding: 0;
+  min-width: 0px;
+
+  background-color: rgb(20, 30, 200);
+  border: none;
+  outline: none;
+
+  color: white;
+  font-size: 1.2rem;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.field input::placeholder {
+  color: white;
+  opacity: 50%;
+}
+
+/* Style input text selection */
+.field input::selection {
+  background: rgba(255, 255, 255, 0.8);
+  color: rgb(20, 30, 200);
+}
+
+.field label, .field input {
+  margin: 4px 0px;
+}
+
+/* Show vertical separator when input focused */
+.field:focus-within .vertical-separator {
+  display: inline-block;
 }

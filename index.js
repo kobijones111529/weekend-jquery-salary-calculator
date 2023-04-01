@@ -1,6 +1,36 @@
 $(document).ready(main);
 
 function main () {
+  // Open (display) and focus form autofocus
+  $('#form .field input[autofocus]').css('display', 'inline-block').focus();
+
+  $('.field input').blur(function (e) { $(e.target).parents('.field').attr('tabindex', 0); });
+
+  $('.field').focus(function (e) {
+    $(e.target).find('input').css('display', 'inline-block').focus();
+  });
+  $('.field').blur(function (e) { $(e.target).attr('tabindex', -1); });
+
+  $('.field input').focus(function (e) {
+    $(e.target).parents('.field').attr('tabindex', -1);
+    $(e.target).parents('.field').find('label').css('display', 'inline-block');
+  });
+  $('.field input').blur(function (e) {
+    const input = $(e.target).val();
+    if (input.length < 1) {
+      $(e.target).css('display', 'none');
+    } else {
+      $(e.target).parent('.field').find('label').css('display', 'none');
+    }
+  });
+
+  $('.field input').on('input', function (e) {
+    const minSize = 1;
+    const maxSize = 20;
+    const length = $(e.target).val().length;
+    $(e.target).attr('size', Math.max(0, Math.min(length || minSize, maxSize)));
+  });
+
   $('#form').submit(formSubmit);
 }
 
@@ -8,32 +38,57 @@ function formSubmit (e) {
   e.preventDefault();
 
   const form = $(e.target);
-  const employee = {
-    firstName: form.children('#form-first-name').val(),
-    lastName: form.children('#form-last-name').val(),
-    id: Number(form.children('#form-id').val()),
-    title: form.children('#form-title').val(),
-    annualSalary: Number(form.children('#form-annual-salary').val())
+  const input = {
+    firstName: form.find('#form-first-name').val(),
+    lastName: form.find('#form-last-name').val(),
+    id: form.find('#form-id').val(),
+    title: form.find('#form-title').val(),
+    annualSalary: form.find('#form-annual-salary').val()
   };
 
-  if (employee.firstName.length < 1) {
-    console.log('Employee must have a name');
+  if (input.firstName.length < 1) {
+    console.log('Employee must have a first name');
     return;
   }
 
-  if (!Number.isInteger(employee.id) || employee.id < 0) {
+  if (input.lastName.length < 1) {
+    console.log('Employee must have a last name');
+    return;
+  }
+
+  const id = Number(input.id);
+  if (input.id.length < 1 || !Number.isInteger(id) || id < 0) {
     console.log('Invalid employee id');
     return;
   }
 
-  if (!Number.isFinite(employee.annualSalary) || employee.annualSalary < 0) {
+  const annualSalary = Number(input.annualSalary);
+  if (
+    input.annualSalary.length < 1 ||
+    Number.isNaN(annualSalary) ||
+    !Number.isFinite(annualSalary) ||
+    annualSalary < 0
+  ) {
     console.log('Invalid annual salary');
     return;
   }
 
-  addEntry(employee);
-  e.target.reset();
-  form.children('*[autofocus]').focus();
+  addEntry({
+    firstName: input.firstName,
+    lastName: input.lastName,
+    id: Number(id),
+    title: input.title,
+    annualSalary: Number(annualSalary)
+  });
+
+  formReset(e.target);
+}
+
+function formReset (form) {
+  $(form).find('.field label').css('display', 'inline-block');
+  $(form).find('.field input').css('display', 'none').val('').attr('size', 1);
+  $(form).find('.field input[autofocus]').css('display', 'inline-block').focus();
+  form.reset();
 }
 
 function addEntry (employee) {
