@@ -51,7 +51,6 @@ function main () {
     monthlyTotalElem.data('amount', monthlyTotal);
     monthlyTotalElem.text(currencyFormatter.format(monthlyTotal));
     if (monthlyTotal <= 20000) {
-      console.log(monthlyTotal);
       monthlyTotalElem.css('background-color', 'rgba(0, 0, 0, 0)');
     }
   });
