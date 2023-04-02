@@ -1,5 +1,11 @@
 $(document).ready(main);
 
+const currencyFormatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+  maximumFractionDigits: 0
+});
+
 function main () {
   // Init total monthly salary to 0
   $('#total-monthly').data('amount', 0);
@@ -35,6 +41,13 @@ function main () {
   });
 
   $('#form').submit(formSubmit);
+
+  $('#data').on('click', '.delete', function (e) {
+    const annualSalary = $(e.target).parents('tr').data('salary');
+    const monthlyTotal = $('#total-monthly').data('amount') - annualSalary / 12;
+    $(e.target).parents('tr').remove();
+    $('#total-monthly').text(currencyFormatter.format(monthlyTotal));
+  });
 }
 
 function formSubmit (e) {
@@ -89,17 +102,13 @@ function formSubmit (e) {
 
 function formReset (form) {
   $(form).find('.field label').css('display', 'inline-block');
+  // TODO calculate correct size
   $(form).find('.field input').css('display', 'none').val('').attr('size', 1);
   $(form).find('.field input[autofocus]').css('display', 'inline-block').focus();
   form.reset();
 }
 
 function addEntry (employee) {
-  const currencyFormatter = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD'
-  });
-
   const makeCell = data => $(`<td>${data}</td>`);
   const row = $('<tr></tr>')
     .append(makeCell(employee.firstName))
@@ -107,6 +116,7 @@ function addEntry (employee) {
     .append(makeCell(employee.id))
     .append(makeCell(employee.title))
     .append(makeCell(currencyFormatter.format(employee.annualSalary)))
+    .append(makeCell('<button class="delete">Delete</button>'))
     .data('salary', employee.annualSalary);
   $('#data').append(row);
 
