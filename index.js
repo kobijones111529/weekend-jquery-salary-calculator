@@ -13,12 +13,13 @@ function main () {
   // Open (display) and focus form autofocus
   $('#form .field input[autofocus]').css('display', 'inline-block').focus();
 
-  $('.field input').blur(function (e) { $(e.target).parents('.field').removeAttr('tabindex'); });
-
   $('.field').focus(function (e) {
     $(e.target).find('input').css('display', 'inline-block').focus();
   });
-  $('.field').blur(function (e) { $(e.target).attr('tabindex', -1); });
+  $('.field').blur(function (e) {
+    // Set tabindex to -1 so previous field can be focused by keyboard
+    $(e.target).attr('tabindex', -1);
+  });
 
   $('.field input').focus(function (e) {
     $(e.target).parents('.field').attr('tabindex', -1);
@@ -31,6 +32,8 @@ function main () {
     } else {
       $(e.target).parent('.field').find('label').css('display', 'none');
     }
+    // Remove -1 tabindex so field can be focused again
+    $(e.target).parent('.field').removeAttr('tabindex');
   });
 
   $('.field input').on('input', function (e) {
