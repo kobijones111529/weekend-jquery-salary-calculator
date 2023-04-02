@@ -33,7 +33,7 @@ function main () {
       $(e.target).parent('.field').find('label').css('display', 'none');
     }
     // Remove -1 tabindex so field can be focused again
-    $(e.target).parent('.field').removeAttr('tabindex');
+    $(e.target).parents('.field').removeAttr('tabindex');
   });
 
   $('.field input').on('input', function (e) {
