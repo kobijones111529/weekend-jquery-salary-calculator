@@ -43,10 +43,17 @@ function main () {
   $('#form').submit(formSubmit);
 
   $('#data').on('click', '.delete', function (e) {
-    const annualSalary = $(e.target).parents('tr').data('salary');
-    const monthlyTotal = $('#total-monthly').data('amount') - annualSalary / 12;
-    $(e.target).parents('tr').remove();
-    $('#total-monthly').text(currencyFormatter.format(monthlyTotal));
+    const rowElem = $(e.target).parents('tr');
+    const annualSalary = rowElem.data('salary');
+    const monthlyTotalElem = $('#total-monthly');
+    const monthlyTotal = monthlyTotalElem.data('amount') - annualSalary / 12;
+    rowElem.remove();
+    monthlyTotalElem.data('amount', monthlyTotal);
+    monthlyTotalElem.text(currencyFormatter.format(monthlyTotal));
+    if (monthlyTotal <= 20000) {
+      console.log(monthlyTotal);
+      monthlyTotalElem.css('background-color', 'rgba(0, 0, 0, 0)');
+    }
   });
 }
 
@@ -124,10 +131,7 @@ function addEntry (employee) {
   const totalMonthly = totalMonthlyElem.data('amount') + employee.annualSalary / 12;
   totalMonthlyElem.data('amount', totalMonthly);
   totalMonthlyElem.text(currencyFormatter.format(totalMonthly));
-
-  console.group(`${employee.firstName} ${employee.lastName}`);
-  console.log('ID:', employee.id);
-  console.log('Title:', employee.title);
-  console.log('Salary:', employee.annualSalary);
-  console.groupEnd();
+  if (totalMonthly > 20000) {
+    totalMonthlyElem.css('background-color', 'red');
+  }
 }
