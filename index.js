@@ -13,7 +13,7 @@ function main () {
   // Open (display) and focus form autofocus
   $('#form .field input[autofocus]').css('display', 'inline-block').focus();
 
-  $('.field input').blur(function (e) { $(e.target).parents('.field').attr('tabindex', 0); });
+  $('.field input').blur(function (e) { $(e.target).parents('.field').removeAttr('tabindex'); });
 
   $('.field').focus(function (e) {
     $(e.target).find('input').css('display', 'inline-block').focus();
