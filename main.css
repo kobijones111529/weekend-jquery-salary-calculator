@@ -104,7 +104,6 @@ main {
 }
 
 .field input {
-  /* flex: auto; */
   padding: 0;
   min-width: 0px;
 

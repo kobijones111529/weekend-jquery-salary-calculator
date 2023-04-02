@@ -43,16 +43,7 @@ function main () {
   $('#form').submit(formSubmit);
 
   $('#data').on('click', '.delete', function (e) {
-    const rowElem = $(e.target).parents('tr');
-    const annualSalary = rowElem.data('salary');
-    const monthlyTotalElem = $('#total-monthly');
-    const monthlyTotal = monthlyTotalElem.data('amount') - annualSalary / 12;
-    rowElem.remove();
-    monthlyTotalElem.data('amount', monthlyTotal);
-    monthlyTotalElem.text(currencyFormatter.format(monthlyTotal));
-    if (monthlyTotal <= 20000) {
-      monthlyTotalElem.css('background-color', 'rgba(0, 0, 0, 0)');
-    }
+    removeEntry($(e.target).parents('tr'));
   });
 }
 
@@ -132,5 +123,17 @@ function addEntry (employee) {
   totalMonthlyElem.text(currencyFormatter.format(totalMonthly));
   if (totalMonthly > 20000) {
     totalMonthlyElem.css('background-color', 'red');
+  }
+}
+
+function removeEntry (entry) {
+  const annualSalary = entry.data('salary');
+  const monthlyTotalElem = $('#total-monthly');
+  const monthlyTotal = monthlyTotalElem.data('amount') - annualSalary / 12;
+  entry.remove();
+  monthlyTotalElem.data('amount', monthlyTotal);
+  monthlyTotalElem.text(currencyFormatter.format(monthlyTotal));
+  if (monthlyTotal <= 20000) {
+    monthlyTotalElem.css('background-color', 'rgba(0, 0, 0, 0)');
   }
 }
