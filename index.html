@@ -16,33 +16,40 @@
 
     <main>
       <form id="form" spellcheck="false">
-        <button class="field" type="button">
-          <label for="first-name">First name</label>
-          <div class="vertical-separator"></div>
-          <input id="form-first-name" name="first-name" autofocus size="1">
-        </button>
-        <button class="field" type="button">
-          <label for="last-name">Last name</label>
-          <div class="vertical-separator"></div>
-          <input id="form-last-name" name="last-name" size="1">
-        </button>
-        <hr>
-        <button class="field" type="button">
-          <label for="id">ID</label>
-          <div class="vertical-separator"></div>
-          <input id="form-id" name="id" placeholder="#" inputmode="numeric" size="1">
-        </button>
-        <button class="field" type="button">
-          <label for="title">Title</label>
-          <div class="vertical-separator"></div>
-          <input id="form-title" name="title" size="1">
-        </button>
-        <button class="field" type="button">
-          <label for="annual-salary">Annual salary</label>
-          <div class="vertical-separator"></div>
-          <input id="form-annual-salary" name="annual-salary" placeholder="$__,___" inputmode="numeric" size="7">
-        </button>
-        <button id="form-submit-btn" type="submit">Submit</button>
+        <div id="input-container">
+          <div class="input-block">
+            <button class="field" type="button">
+              <label for="first-name">First name</label>
+              <div class="vertical-separator"></div>
+              <input id="form-first-name" name="first-name" autofocus size="1">
+            </button>
+            <button class="field" type="button">
+              <label for="last-name">Last name</label>
+              <div class="vertical-separator"></div>
+              <input id="form-last-name" name="last-name" size="1">
+            </button>
+          </div>
+          <div class="input-block">
+            <button class="field" type="button">
+              <label for="id">ID</label>
+              <div class="vertical-separator"></div>
+              <input id="form-id" name="id" placeholder="#" inputmode="numeric" size="1">
+            </button>
+            <button class="field" type="button">
+              <label for="title">Title</label>
+              <div class="vertical-separator"></div>
+              <input id="form-title" name="title" size="1">
+            </button>
+            <button class="field" type="button">
+              <label for="annual-salary">Annual salary</label>
+              <div class="vertical-separator"></div>
+              <input id="form-annual-salary" name="annual-salary" placeholder="$__,___" inputmode="numeric" size="7">
+            </button>
+          </div>
+        </div>
+        <div id="form-submit-container">
+          <button id="form-submit-btn" type="submit">Add</button>
+        </div>
       </form>
 
       <table id="data">
