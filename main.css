@@ -135,3 +135,12 @@ main {
 .field:focus-within .vertical-separator {
   display: inline-block;
 }
+
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 8px;
+}
