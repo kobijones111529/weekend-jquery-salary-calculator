@@ -154,7 +154,11 @@ const addEntry = data => {
 
   const totalMonthlyElem = document.querySelector('#total-monthly');
   totalMonthlyElem.dataset.amount = Number(totalMonthlyElem.dataset.amount) + data.annualSalary / 12;
-  totalMonthlyElem.textContent = currency.format(totalMonthlyElem.dataset.amount);
+  totalMonthlyElem.textContent = currency.format(Math.round(totalMonthlyElem.dataset.amount));
+
+  if (totalMonthlyElem.dataset.amount > 20000) {
+    totalMonthlyElem.style.backgroundColor = '#FF3F3F';
+  }
 };
 
 const removeEntry = elem => {
@@ -163,7 +167,11 @@ const removeEntry = elem => {
   const totalMonthlyElem = document.querySelector('#total-monthly');
   totalMonthlyElem.dataset.amount = Number(totalMonthlyElem.dataset.amount) -
     Number(rowElem.dataset.annualSalary) / 12;
-  totalMonthlyElem.textContent = currency.format(totalMonthlyElem.dataset.amount);
+  totalMonthlyElem.textContent = currency.format(Math.round(totalMonthlyElem.dataset.amount));
+
+  if (totalMonthlyElem.dataset.amount <= 20000) {
+    totalMonthlyElem.style.backgroundColor = 'rgba(0, 0, 0, 0)';
+  }
 
   rowElem.remove();
 };
